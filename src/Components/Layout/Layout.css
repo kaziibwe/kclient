@@ -1,0 +1,25 @@
+/* Default sidebar behavior */
+.sidebar {
+    transition: all 0.3s ease;
+  }
+  
+  /* Hidden sidebar */
+  .sidebar-hidden {
+    transform: translateX(-100%);
+  }
+  
+  /* Visible sidebar */
+  .sidebar-visible {
+    transform: translateX(-90%);
+  }
+  
+
+
+  
+  /* Ensure sidebar is visible on larger screens */
+  @media (min-width: 992px) {
+    .sidebar-visible {
+      transform: translateX(0); /* Always visible on large screens */
+    }
+  }
+  
