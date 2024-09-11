@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
- export const useFetch = (url,query) => {
+  const useFetch = (url,query) => {
     const [data, setData] = useState(null);
     const [error, setError] = useState(null);
     const [isPending, setIsPending] = useState(true);
@@ -41,43 +41,32 @@ import { useState, useEffect } from 'react';
     return { data, isPending, error }; // Return data, isPending, and error state
 };
 
-// export default useFetch;
+export default useFetch;
 
 
 
-export const usePost = (url, formData) => {
-    const [data, setData] = useState(null);
-    const [isPending, setIsPending] = useState(false);
-    const [error, setError] = useState(null);
-    const navigate = useNavigate();
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        setIsPending(true);
 
-        fetch(url, {
-            method: 'POST',
-            headers: {
-                Accept: 'application/json',
-            },
-            body: formData, // Directly pass the FormData object
-        })
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                return response.json(); // Parse the JSON from the response
-            })
-            .then((data) => {
-                setData(data); // Set the response data
-                setIsPending(false);
-                navigate("/category"); // Navigate to the category page on success
-            })
-            .catch((err) => {
-                setError(err.message); // Set error message
-                setIsPending(false);
-            });
-    };
+    // const handleDelete = async (id) => {
+    //     if (!window.confirm("Are you sure you want to delete this item?")) return;
 
-    return { data, isPending, error, handleSubmit }; // Return all necessary states and the handler
-};
+    //     setLoading(true);
+    //     try {
+    //         const response = await fetch(`http://127.0.0.1:8000/api/v1/admin/delete/category/${id}`, {
+    //             method: 'POST',
+    //         });
+
+    //         if (!response.ok) {
+    //             throw new Error('Failed to delete item');
+    //         }
+
+    //         // Refresh the list after deletion
+    //         window.location.reload();
+
+    //         setItems(items.filter(item => item.id !== id));
+    //     } catch (error) {
+    //         console.error('Error deleting item:', error);
+    //     } finally {
+    //         setLoading(false);
+    //     }
+    // };  

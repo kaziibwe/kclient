@@ -1,28 +1,27 @@
 import React from 'react'
-import Layout from '../../Components/Layout/Layout'
 import useFetch from '../../useFetch'
-import useDelete from '../../useDelete'
-import { useState, useEffect } from 'react';
+import useDelete from '../../useDelete';
+import Layout from '../../Components/Layout/Layout'
 import { Link } from 'react-router-dom';
 
 
-
-function Category() {
+function Product() {
     const BASE_URL = import.meta.env.KCLIENT_BASE_URL;
     const IMAGE_URL =import.meta.env.KCLIENT_IMAGE_URL;
 
-    // console.log(BASE_URL);
-    const [loading, setLoading] = useState(false);
-    const url = `${BASE_URL}/cart/get-all/category`;
+
+    const url = `${BASE_URL}/cart/get-all/product`;
+
     const query = {
-        perPage: '50',
+        perPage: '20',
         orderBy: "desc",  
     };
 
     const { data,isPending,error} = useFetch(url,query);
 
-    // console.log(data) 
-    const deleteUrl = `${BASE_URL}/admin/delete/category`; // The base URL for deleting categories
+
+
+    const deleteUrl = `${BASE_URL}/admin/delete/product`; // The base URL for deleting categories
     const { dataRes, isDeletePending, err, deleteData } = useDelete(deleteUrl); // Using useDelete hook
     const handleDelete = async (id) => {
         if (!window.confirm("Are you sure you want to delete this item?")) return;
@@ -30,28 +29,26 @@ function Category() {
         window.location.reload()
 
     };
-    
 
-
-    return (
-        <>
-            <Layout />
-            <main id="main" className="main">
+  return (
+    <>
+    <Layout/>
+    <main id="main" className="main">
                 <div class="pagetitle">
-                    <h1>Main Category</h1>
+                    <h1>Main product</h1>
                     <nav>
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="">Home</a></li>
                             <li class="breadcrumb-item">Manage Goods</li>
-                            <li class="breadcrumb-item active">Category</li>
+                            <li class="breadcrumb-item active">product</li>
                         </ol>
                     </nav>
                 </div>
                 <div class="card">
                     <div class="card-body"> <br />
-                        <Link to={`/addcategory`} class="btn btn-primary">Add Category</Link>
+                        <Link to={`/addproduct`} class="btn btn-primary">Add product</Link>
 
-                        <h5 class="card-title">Manage Category</h5>
+                        <h5 class="card-title">Manage product</h5>
 
                         <table class="table table-hover">
                             <thead>
@@ -59,6 +56,10 @@ function Category() {
                                     <th scope="col">SN</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">image</th>
+                                    <th scope="col">Price</th>
+                                    <th scope="col">Discount</th>
+                                    <th scope="col">Active</th>
+                                    <th scope="col">Featured</th>
                                     <th scope="col">Manage</th>
                                 </tr>
                             </thead>
@@ -69,34 +70,41 @@ function Category() {
                                         <td colSpan="3">Error: {error}</td>
                                     </tr>
                                 ) : data ? (
-                                    data.results.data.map((category, index) => (
-                                        <tr key={category.id}>
+                                    data.results.data.map((product, index) => (
+                                        <tr key={product.id}>
                                             <th scope="row">{index + 1}</th>
-                                            <td>{category.name}</td>
+                                            <td>{product.name}</td>
                                             <td>
                                                 <img
-                                                    src={`${IMAGE_URL}/${category.image}`}
-                                                    alt={category.name}
+                                                    src={`${IMAGE_URL}/${product.image}`}
+                                                    alt={product.name}
                                                     className="rounded-circle"
                                                     width="50px" height="50px"
                                                 />
                                             </td>
+                                            <td>{product.price}</td>
+                                            <td>{product.discount}</td>
+                                            <td>{product.active}</td>
+                                            <td>{product.featured}</td>
+                                           
 
                                             <td>
 
-                                                <Link to={`/editcategory/${category.id}`} class="btn btn-success">Edit</Link>
+                                                <Link to={`/editproduct/${product.id}`} class="btn btn-success">Edit</Link>
 
                                             </td>
                                             <td>
 
                                             <button
                                                     className="btn btn-danger"
-                                                    onClick={() => handleDelete(category.id)}
+                                                    onClick={() => handleDelete(product.id)}
                                                     disabled={isDeletePending}
                                                 >
                                                     Delete
                                                 </button>
                                                 {err && <span className="text-danger">{err}</span>}
+
+
                                             </td>
                                         </tr>
                                     ))
@@ -114,8 +122,9 @@ function Category() {
                     </div>
                 </div>
             </main>
-        </>
-    )
+      
+    </>
+  )
 }
 
-export default Category
+export default Product

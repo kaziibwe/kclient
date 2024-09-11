@@ -1,38 +1,51 @@
+
+
 import { useState } from 'react';
 import Layout from '../../Components/Layout/Layout';
 import { useNavigate } from 'react-router-dom';
 import usePost from '../../usePost';
+import useFetch from '../../useFetch'
 
-function AddCategory() {
-    const [name, setName] = useState('');
-    const [image, setImage] = useState(null);
-    const [login, setLogin] = useState('Add Category');
-    const navigate = useNavigate();
 
-    // Using the custom hook for POST request
+function AddProductGallary() {
     const BASE_URL = import.meta.env.KCLIENT_BASE_URL;
 
-    const { dataRes, isPostPending, err, postData } = usePost(`${BASE_URL}/admin/post-all/category`, true);
+    const url = `${BASE_URL}/cart/get-all/product`;
+
+    const query = {
+        perPage: '100',
+        orderBy: "desc",
+    };
+    
+    const { data, isPending, error } = useFetch(url, query);
+
+
+  
+    const [product_id, setproduct_id] = useState('');
+
+    const [image, setImage] = useState(null);
+    const [login, setLogin] = useState('Add ProductGallary');
+    const navigate = useNavigate();
+
+
+    // Using the custom hook for POST request
+    const { dataRes, isPostPending, err, postData } = usePost(`${BASE_URL}/admin/post-all/ProductGallary`, true);
 
     const handleSubmit = (e) => {
         e.preventDefault();
 
         // Create a FormData object
         const formData = new FormData();
-        formData.append('name', name);
+        formData.append('product_id', product_id);
         formData.append('image', image);
+  
 
-        // Trigger the POST request using the postData function from the hook
-        // console data in the form data
-        // for (let [key, value] of formData.entries()) {
-        //     console.log(`${key}: ${value}`);
-        //   }
-        postData(formData);
+                postData(formData);
     };
 
     // Navigate after successful submission
     if (dataRes && !isPostPending && !err) {
-        navigate("/category");
+        navigate("/ProductGallary");
     }
 
     return (
@@ -40,13 +53,13 @@ function AddCategory() {
             <Layout />
             <main id="main" className="main">
                 <div className="pagetitle">
-                    <h1>Main Category</h1>
+                    <h1>Main Product</h1>
                     <nav>
                         <ol className="breadcrumb">
                             <li className="breadcrumb-item"><a href=" ">Home</a></li>
                             <li className="breadcrumb-item">Manage Goods</li>
-                            <li className="breadcrumb-item active"><a href="">MainCategory</a></li>
-                            <li className="breadcrumb-item">Add Category</li>
+                            <li className="breadcrumb-item active"><a href="">MainProduct</a></li>
+                            <li className="breadcrumb-item">Add Product</li>
                         </ol>
                     </nav>
                 </div>
@@ -54,21 +67,43 @@ function AddCategory() {
                 <div className="col-lg-6">
                     <div className="card">
                         <div className="card-body">
-                            <h5 className="card-title">Add the Category below</h5>
+                            <h5 className="card-title">Add the Product below</h5>
 
                             <form method="POST" action="" encType="multipart/form-data" onSubmit={handleSubmit}>
-                                <div className="row mb-3">
-                                    <label htmlFor="inputText" className="col-sm-2 col-form-label">Name</label>
+
+
+
+                                                            {/* Select product */}
+                                                            <div className="row mb-3">
+                                    <label htmlFor="productSelect" className="col-sm-2 col-form-label">product</label>
                                     <div className="col-sm-10">
-                                        <input
-                                            type="text"
-                                            name="name"
+                                        <select
                                             className="form-control"
-                                            value={name}
-                                            onChange={(e) => setName(e.target.value)}
-                                        />
+                                            id="productSelect"
+                                            value={product_id}
+                                            onChange={(e) => setproduct_id(e.target.value)}
+                                        >
+                                            <option value="">Select product</option>
+                                            {error ? (
+                                                <option>Error: {error}</option>
+                                            ) : isPending ? (
+                                                <option>Loading categories...</option>
+                                            ) : (
+                                                data && data.results.data.map((product) => (
+                                                    <option key={product.id} value={product.id}>
+                                                        {product.name}
+                                                    </option>
+                                                ))
+                                            )}
+                                        </select>
                                     </div>
-                                    <br /><br /><br />
+                                </div>
+
+
+
+
+                                <div className="row mb-3">
+                                   
                                     <div className="row mb-3">
                                         <label htmlFor="inputNumber" className="col-sm-2 col-form-label">Image</label>
                                         <div className="col-sm-10">
@@ -81,6 +116,9 @@ function AddCategory() {
                                             />
                                         </div>
                                     </div>
+
+
+
                                 </div>
 
                                 <div className="row mb-3">
@@ -107,4 +145,4 @@ function AddCategory() {
     );
 }
 
-export default AddCategory;
+export default AddProductGallary; // Make sure you have this default export

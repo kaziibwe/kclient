@@ -84,6 +84,36 @@ const Layout = () => {
                 </Link>
               </li>
             </ul>
+            <ul id="components-nav" className="nav-content collapse" data-bs-parent="#sidebar-nav">
+              <li>
+                <Link to={`/product`}>
+                  <i className="bi bi-circle"></i><span>manage Product</span>
+                </Link>
+              </li>
+            </ul>
+
+            <ul id="components-nav" className="nav-content collapse" data-bs-parent="#sidebar-nav">
+              <li>
+                <Link to={`/ProductGallary`}>
+                  <i className="bi bi-circle"></i><span>manage ProductGallary</span>
+                </Link>
+              </li>
+            </ul>
+            <ul id="components-nav" className="nav-content collapse" data-bs-parent="#sidebar-nav">
+              <li>
+                <Link to={`/step`}>
+                  <i className="bi bi-circle"></i><span>manage Step</span>
+                </Link>
+              </li>
+            </ul>
+
+            <ul id="components-nav" className="nav-content collapse" data-bs-parent="#sidebar-nav">
+              <li>
+                <Link to={`/ingredient`}>
+                  <i className="bi bi-circle"></i><span>manage Ingredient</span>
+                </Link>
+              </li>
+            </ul>
           </li>
         </ul>
       </aside>
