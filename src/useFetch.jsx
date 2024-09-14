@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
     const [data, setData] = useState(null);
     const [error, setError] = useState(null);
     const [isPending, setIsPending] = useState(true);
+    const [token, setToken] = useState(localStorage.getItem("access_token"));
 
     useEffect(() => {
         const abortCont = new AbortController();
@@ -13,6 +14,9 @@ import { useState, useEffect } from 'react';
             method: 'POST', // POST method to fetch data
             headers: {
                 'Content-Type': 'application/json',
+                Accept:'application/json',
+                Authorization: `Bearer ${token}`,
+
             },
             body:  JSON.stringify(query),
         })

@@ -7,7 +7,7 @@ import usePost from '../../usePost';
 import useFetch from '../../useFetch'
 
 
-function AddProductGallary() {
+function AddStep() {
     const BASE_URL = import.meta.env.KCLIENT_BASE_URL;
 
     const url = `${BASE_URL}/cart/get-all/product`;
@@ -23,13 +23,13 @@ function AddProductGallary() {
   
     const [product_id, setproduct_id] = useState('');
 
-    const [image, setImage] = useState(null);
-    const [login, setLogin] = useState('Add ProductGallary');
+    const [NameStep, setNameStep] = useState(null);
+    const [login, setLogin] = useState('Add step');
     const navigate = useNavigate();
 
 
     // Using the custom hook for POST request
-    const { dataRes, isPostPending, err, postData } = usePost(`${BASE_URL}/admin/post-all/ProductGallary`, true);
+    const { dataRes, isPostPending, err, postData } = usePost(`${BASE_URL}/admin/post-all/step`, true);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -37,7 +37,7 @@ function AddProductGallary() {
         // Create a FormData object
         const formData = new FormData();
         formData.append('product_id', product_id);
-        formData.append('image', image);
+        formData.append('step', NameStep);
   
 
                 postData(formData);
@@ -45,7 +45,7 @@ function AddProductGallary() {
 
     // Navigate after successful submission
     if (dataRes && !isPostPending && !err) {
-        navigate("/ProductGallary");
+        navigate("/step");
     }
 
     return (
@@ -53,13 +53,13 @@ function AddProductGallary() {
             <Layout />
             <main id="main" className="main">
                 <div className="pagetitle">
-                    <h1>Main ProductGallary</h1>
+                    <h1>Main step</h1>
                     <nav>
                         <ol className="breadcrumb">
                             <li className="breadcrumb-item"><a href=" ">Home</a></li>
                             <li className="breadcrumb-item">Manage Goods</li>
-                            <li className="breadcrumb-item active"><a href="">MainProductGallary</a></li>
-                            <li className="breadcrumb-item">Add ProductGallary</li>
+                            <li className="breadcrumb-item active"><a href="">Mainstep</a></li>
+                            <li className="breadcrumb-item">Add step</li>
                         </ol>
                     </nav>
                 </div>
@@ -67,7 +67,7 @@ function AddProductGallary() {
                 <div className="col-lg-6">
                     <div className="card">
                         <div className="card-body">
-                            <h5 className="card-title">Add the ProductGallary below</h5>
+                            <h5 className="card-title">Add the step below</h5>
 
                             <form method="POST" action="" encType="multipart/form-data" onSubmit={handleSubmit}>
 
@@ -105,14 +105,14 @@ function AddProductGallary() {
                                 <div className="row mb-3">
                                    
                                     <div className="row mb-3">
-                                        <label htmlFor="inputNumber" className="col-sm-2 col-form-label">Image</label>
+                                        <label htmlFor="inputNumber" className="col-sm-2 col-form-label">Step</label>
                                         <div className="col-sm-10">
                                             <input
                                                 className="form-control"
-                                                type="file"
+                                                type="text"
                                                 id="formFile"
-                                                name="image"
-                                                onChange={(e) => setImage(e.target.files[0])}
+                                                name="NameStep"
+                                                onChange={(e) => setNameStep(e.target.value)}
                                             />
                                         </div>
                                     </div>
@@ -145,4 +145,4 @@ function AddProductGallary() {
     );
 }
 
-export default AddProductGallary; // Make sure you have this default export
+export default AddStep; // Make sure you have this default export

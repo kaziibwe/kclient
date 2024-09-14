@@ -11,7 +11,7 @@ function EditCategory() {
     console.log(IMAGE_URL)
 
 
-    const { data, error } = useFetch(`${BASE_URL}/cart/get/category/${id}`);
+    const { data, error } = useFetch(`${BASE_URL}/admin/get/category/${id}`);
 
     const [name, setName] = useState();
     const [image, setImage] = useState(null);

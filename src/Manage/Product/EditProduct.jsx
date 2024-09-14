@@ -29,7 +29,7 @@ function EditProduct() {
     const BASE_URL = import.meta.env.KCLIENT_BASE_URL;
 
   
-    const { data: product, error } = useFetch(`${BASE_URL}/cart/get/product/${id}`);
+    const { data: product, error } = useFetch(`${BASE_URL}/admin/get/product/${id}`);
 
     // console.log(product.data.product)
         const [category_id, setCategory_id] = useState('');
@@ -46,7 +46,7 @@ function EditProduct() {
 
         
 
-    const url = `${BASE_URL}/cart/get-all/category`;
+    const url = `${BASE_URL}/admin/get-all/category`;
 
     const query = {
         perPage: '100',

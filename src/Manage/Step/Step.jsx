@@ -47,7 +47,7 @@ function Step() {
                 </div>
                 <div class="card">
                     <div class="card-body"> <br />
-                        <Link to={`/Addstep`} class="btn btn-primary">Add step</Link>
+                        <Link to={`/addstep`} class="btn btn-primary">Add step</Link>
 
                         <h5 class="card-title">Manage step</h5>
 

@@ -5,6 +5,7 @@ const useDelete = (base_Url) => {
     const [dataRes, setDataRes] = useState(null);
     const [err, setErr] = useState(null);
     const [isDeletePending, setIsDeletePending] = useState(false);
+    const [token, setToken] = useState(localStorage.getItem("access_token"));
 
     const deleteData = async (id) => {
         setIsDeletePending(true);
@@ -18,6 +19,8 @@ const useDelete = (base_Url) => {
                 headers: {
                     'Content-Type': 'application/json',
                     Accept: 'application/json',
+                    Authorization: `Bearer ${token}`,
+
                 },
             });
 

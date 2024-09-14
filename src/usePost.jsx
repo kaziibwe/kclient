@@ -4,6 +4,7 @@ const usePost = (url, isFormData = false) => {
     const [dataRes, setDataRes] = useState(null);
     const [err, setErr] = useState(null);
     const [isPostPending, setIsPostPending] = useState(false);
+    const [token, setToken] = useState(localStorage.getItem("access_token"));
 
     const postData = async (requestData) => {
         setIsPostPending(true); // Start loading state
@@ -13,8 +14,10 @@ const usePost = (url, isFormData = false) => {
             const options = {
                 method: 'POST',
                 headers: isFormData
-                    ? { Accept: 'application/json' } // No 'Content-Type' for FormData
-                    : { 'Content-Type': 'application/json', Accept: 'application/json' },
+                    ? { Accept: 'application/json', Authorization: `Bearer ${token}`,
+                } // No 'Content-Type' for FormData
+                    : { 'Content-Type': 'application/json', Accept: 'application/json' ,  Authorization: `Bearer ${token}`,
+                },
                 body: isFormData ? requestData : JSON.stringify(requestData),
             };
 

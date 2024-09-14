@@ -10,7 +10,7 @@ function Product() {
     const IMAGE_URL =import.meta.env.KCLIENT_IMAGE_URL;
 
 
-    const url = `${BASE_URL}/cart/get-all/product`;
+    const url = `${BASE_URL}/admin/get-all/product`;
 
     const query = {
         perPage: '20',
