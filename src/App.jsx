@@ -33,25 +33,26 @@ const App = () => {
   const { user, loading } = useContext(AppContext);
 
   // Show spinner while loading
-  if (loading) {
-    return (
-      <div style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '100vh'  // Full screen height
-      }}>
-      <div className="spinner-border" role="status">
-        <span className="visually-hidden">Loading...</span>
-      </div>
-      </div>
+  // if (loading) {
+  //   return (
+  //     <div style={{
+  //       display: 'flex',
+  //       justifyContent: 'center',
+  //       alignItems: 'center',
+  //       height: '100vh'  // Full screen height
+  //     }}>
+  //     <div className="spinner-border" role="status">
+  //       <span className="visually-hidden">Loading...</span>
+  //     </div>
+  //     </div>
 
-    );
-  }
+  //   );
+  // }
 
   return (
 <BrowserRouter>
 <Routes>
+
 
         <Route path='/' element={user ?<Home />:<Login/>}></Route>
         {/* category */}
@@ -99,11 +100,11 @@ const App = () => {
 
 
         
-
-        
-
-        
         <Route  path='/login' element={<Login/> }></Route>
+
+        
+
+        
 
 
       </Routes>

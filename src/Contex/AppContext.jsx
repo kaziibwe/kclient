@@ -43,11 +43,13 @@ export const AppContext = createContext();
 export default function AppProvider({ children }) {
   const [token, setToken] = useState(localStorage.getItem("access_token"));
   const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true); // Start with loading as true
+  const [loading, setLoading] = useState(false); // Start with loading as true
 
   async function getUser() {
+    const BASE_URL = import.meta.env.KCLIENT_BASE_URL;
+
     setLoading(true); // Start loader when fetching begins
-    const res = await fetch("/api/profileAdmin", {
+    const res = await fetch("https://testapi.cognospheredynamics.com/api/v1/profileAdmin", {
       method:'Post',
       headers: {
         Authorization: `Bearer ${token}`,
@@ -55,6 +57,7 @@ export default function AppProvider({ children }) {
     });
     const data = await res.json();
 
+    console.log(data)
     if (res.ok) {
       setUser(data);
     }

@@ -1,25 +1,27 @@
-/* Default sidebar behavior */
+/* Sidebar Visible */
+#sidebar.sidebar-visible {
+  transform: translateX(0);
+  transition: transform 0.3s ease;
+}
+
+/* Sidebar Hidden */
+#sidebar.sidebar-hidden {
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+}
+
+/* Sidebar structure */
 .sidebar {
-    transition: all 0.3s ease;
-  }
-  
-  /* Hidden sidebar */
-  .sidebar-hidden {
-    transform: translateX(-100%);
-  }
-  
-  /* Visible sidebar */
-  .sidebar-visible {
-    transform: translateX(-90%);
-  }
-  
+  position: fixed; /* Ensures it's off the main flow */
+  top: 40px;
+  left: 0;
+  width: 250px;
+  height: 100vh;
+  background-color: #fff;
+  z-index: 100; /* Adjust as necessary */
+}
 
-
-  
-  /* Ensure sidebar is visible on larger screens */
-  @media (min-width: 992px) {
-    .sidebar-visible {
-      transform: translateX(0); /* Always visible on large screens */
-    }
-  }
-  
+.header {
+  height: 60px; /* Adjust this depending on your header size */
+  background-color: #f8f9fa;
+}
