@@ -10,7 +10,7 @@ function ProductGallary() {
     const IMAGE_URL =import.meta.env.KCLIENT_IMAGE_URL;
 
 
-    const url = `${BASE_URL}/cart/get-all/ProductGallary`;
+    const url = `${BASE_URL}/admin/get-all/ProductGallary`;
 
     const query = {
         perPage: '50',

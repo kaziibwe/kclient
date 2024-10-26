@@ -10,7 +10,7 @@ import useFetch from '../../useFetch'
 function AddProduct() {
     const BASE_URL = import.meta.env.KCLIENT_BASE_URL;
 
-    const url = `${BASE_URL}/cart/get-all/category`;
+    const url = `${BASE_URL}/admin/get-all/category`;
 
     const query = {
         perPage: '100',
