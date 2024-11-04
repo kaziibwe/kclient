@@ -166,6 +166,7 @@ import { useNavigate } from 'react-router-dom'
 import { AppContext } from "../Contex/AppContext";
 
 const Login = () => {
+  const BASE_URL = import.meta.env.KCLIENT_BASE_URL;
 
   const { token, setToken } = useContext(AppContext);
   const [isPending, setIsPending] = useState(false);
@@ -182,7 +183,7 @@ const Login = () => {
     setError(false);
 
     try {
-      const response = await fetch('https://testapi.cognospheredynamics.com/api/v1/adminlogin', {
+      const response = await fetch('https://testapi.pearlbuddy.com/api/v1/adminlogin', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

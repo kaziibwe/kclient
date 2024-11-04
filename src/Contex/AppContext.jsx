@@ -49,7 +49,7 @@ export default function AppProvider({ children }) {
     const BASE_URL = import.meta.env.KCLIENT_BASE_URL;
 
     setLoading(true); // Start loader when fetching begins
-    const res = await fetch("https://testapi.cognospheredynamics.com/api/v1/profileAdmin", {
+    const res = await fetch("https://testapi.pearlbuddy.com/api/v1/profileAdmin", {
       method:'Post',
       headers: {
         Authorization: `Bearer ${token}`,
