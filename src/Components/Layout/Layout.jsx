@@ -18,15 +18,11 @@ const IMAGE_URL =import.meta.env.KCLIENT_IMAGE_URL;
   // const [isSidebarVisible, setIsSidebarVisible] = useState(true);
 
   // Function to toggle the sidebar
-  const [isSidebarVisible, setIsSidebarVisible] = useState(true);
-  // const [isProfileDropdownVisible, setIsProfileDropdownVisible] = useState(false);
-  
   const toggleSidebar = () => {
     setIsSidebarVisible(!isSidebarVisible);
   };
 
-
-
+  const [isSidebarVisible, setIsSidebarVisible] = useState(true);
   const [dropdowns, setDropdowns] = useState({
     products: false,
     orders: false,
@@ -35,16 +31,25 @@ const IMAGE_URL =import.meta.env.KCLIENT_IMAGE_URL;
     manage: false,
   });
 
-  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
+  const toggleDropdown = (dropdownName) => {
+    setDropdowns((prev) => ({
+      ...prev,
+      [dropdownName]: !prev[dropdownName],
+    }));
+  };
 
-  const toggleDropdown = (e) => {
+  const [isProfileMenuVisible, setIsProfileMenuVisible] = useState(false);
+
+  const handleProfileMenuToggle = (e) => {
     e.preventDefault();
-    setIsDropdownVisible(!isDropdownVisible);
+    setIsProfileMenuVisible((prevVisible) => !prevVisible);
   };
 
-  const toggleProfileDropdown = () => {
-    setIsProfileDropdownVisible(!isProfileDropdownVisible);
-  };
+
+
+
+
+  
 
   return (
     <div>
@@ -222,7 +227,7 @@ const IMAGE_URL =import.meta.env.KCLIENT_IMAGE_URL;
       <a 
         className="nav-link nav-profile d-flex align-items-center pe-0"
         href="#" 
-        onClick={toggleDropdown}
+        onClick={handleProfileMenuToggle}
       >
         <img src={`${IMAGE_URL}/${user?.image}`} alt="Profile" className="rounded-circle" />
         <span className="d-none d-md-block dropdown-toggle ps-2">
@@ -230,7 +235,7 @@ const IMAGE_URL =import.meta.env.KCLIENT_IMAGE_URL;
         </span>
       </a>
 
-      {isDropdownVisible && (
+      {isProfileMenuVisible && (
         <ul className="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile show">
           <li className="dropdown-header">
             <h6>{user ? user.name : null}</h6>
@@ -263,7 +268,7 @@ const IMAGE_URL =import.meta.env.KCLIENT_IMAGE_URL;
           <li><hr className="dropdown-divider" /></li>
 
           <li>
-            <Link className="dropdown-item d-flex align-items-center" to="/login">
+            <Link className="dropdown-item d-flex align-items-center" to={'/login'}>
               <i className="bi bi-box-arrow-right"></i>
               <span>Sign Out</span>
             </Link>
@@ -271,7 +276,6 @@ const IMAGE_URL =import.meta.env.KCLIENT_IMAGE_URL;
         </ul>
       )}
     </li>
-
 
       </ul>
     </nav>
